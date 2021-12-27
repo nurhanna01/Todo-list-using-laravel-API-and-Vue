@@ -36,4 +36,27 @@ class UserController extends BaseController
             return $this->responseError("Registration is Failed!", 400);
         }
     }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email'     => 'required',
+            'password'  => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseError('Login Failed', 422, $validator->errors());
+        }
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return $this->responseError('Wrong email!', 400);
+        }
+        $check = Hash::check($request->password, $user->password);
+        if (!$check) {
+            return $this->responseError('Wrong Password!', 400);
+        }
+        $user['token'] = $user->createToken('personal token')->plainTextToken;
+
+        return $this->responseOk($user, 200, 'Login Succes!');
+    }
 }
