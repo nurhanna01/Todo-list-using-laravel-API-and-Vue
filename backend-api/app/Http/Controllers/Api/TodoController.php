@@ -37,7 +37,7 @@ class TodoController extends BaseController
         $todo = Todo::create([
             'date'      => $this->today,
             'task'      => $request->task,
-            'status'    => '0',
+            'is_approved'    => '0',
             'user_id'   => Auth::user()->id,
         ]);
 
@@ -46,5 +46,23 @@ class TodoController extends BaseController
         }
 
         return $this->responseOk('Success add new list', 200);
+    }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'is_approved' => 'required',
+            'id'          => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseError('Failed', 402, $validator->errors());
+        }
+
+        $todo = Todo::find($request->id);
+        $todo->is_approved = '1';
+        $todo->save();
+
+        return $this->responseOk('Success', 200);
     }
 }

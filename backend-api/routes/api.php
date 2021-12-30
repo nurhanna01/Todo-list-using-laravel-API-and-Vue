@@ -24,4 +24,5 @@ Route::post('/user/login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/todo/index', [TodoController::class, 'index']);
     Route::post('/todo/create', [TodoController::class, 'create']);
+    Route::put('/todo/update', [TodoController::class, 'update']);
 });
