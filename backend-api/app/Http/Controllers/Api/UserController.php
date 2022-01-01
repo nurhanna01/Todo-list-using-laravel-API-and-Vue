@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends BaseController
 {
@@ -58,5 +59,16 @@ class UserController extends BaseController
         $user['token'] = $user->createToken('personal token')->plainTextToken;
 
         return $this->responseOk($user, 200, 'Login Succes!');
+    }
+
+    public function profil()
+    {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        if ($user) {
+            return $this->responseOk($user, 200);
+        } else {
+            return $this->responseError('Something Wrong,Please Contact admin!');
+        }
     }
 }
