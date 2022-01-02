@@ -79,4 +79,10 @@ class TodoController extends BaseController
         $todo->delete();
         return $this->responseOk('Success', 200);
     }
+
+    public function search($date)
+    {
+        $activities = Todo::where('date', $date)->get();
+        return $this->responseOk($activities, 200);
+    }
 }
