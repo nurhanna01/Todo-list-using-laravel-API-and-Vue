@@ -71,4 +71,21 @@ class UserController extends BaseController
             return $this->responseError('Something Wrong,Please Contact admin!');
         }
     }
+
+    public function update(Request $request)
+    {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->birth = $request->bitrh;
+        $user->gender = $request->gender;
+        $update_user = $user->save();
+
+        if ($update_user) {
+            return $this->responseOk($user, 200);
+        } else {
+            return $this->responseError('Something Wrong,Please Contact admin!');
+        }
+    }
 }
