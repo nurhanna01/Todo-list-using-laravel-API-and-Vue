@@ -51,7 +51,6 @@ class TodoController extends BaseController
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'is_approved' => 'required',
             'id'          => 'required'
         ]);
 
