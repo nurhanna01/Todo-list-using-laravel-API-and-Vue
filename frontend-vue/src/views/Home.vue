@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <strong>ToDo List Today</strong>
-    <p v-bind="h"></p>
     <table class="table table-success">
       <thead>
         <tr>
@@ -25,6 +24,7 @@
               v-else-if="list.is_approved == 0"
               type="button"
               class="btn btn-info"
+              v-on:click="update(list.id)"
               >Approve</a
             >
           </td>
@@ -36,6 +36,9 @@
 
 <script>
 import axios from "axios";
+axios.defaults.headers.common["Authorization"] =
+  "Bearer " + localStorage.getItem("token");
+
 export default {
   name: "Home",
 
@@ -46,21 +49,37 @@ export default {
       token: localStorage.getItem("token"),
 
       lists: [],
-
-      h: "",
     };
   },
 
-  methods: {},
+  methods: {
+    update(user_id) {
+      axios
+        .put("http://localhost:8000/api/todo/update", {
+          id: user_id,
+        })
+        .then((response) => {
+          alert(response.data.message);
+          axios
+            .get("http://localhost:8000/api/todo/index", {})
+            .then((response) => {
+              console.log(response.data.data);
+              this.lists = response.data.data;
+            });
+        })
+        .catch((error) => {
+          if (error.response) {
+            alert(error.response.data.error);
+          }
+        });
+    },
+  },
   created() {
     axios
-      .get("http://localhost:8000/api/todo/index", {
-        headers: { Authorization: "Bearer " + this.token },
-      })
+      .get("http://localhost:8000/api/todo/index", {})
       .then((response) => {
         console.log(response.data.data);
         this.lists = response.data.data;
-        this.h = Object.keys(this.lists.data.date[0])[0];
       })
       .catch((error) => {
         console.log(error);
