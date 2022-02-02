@@ -19,6 +19,12 @@
           <td>{{ list.task }}</td>
           <td>
             <a
+              type="button"
+              class="btn btn-danger"
+              v-on:click="destroy(list.id)"
+              >Delete</a
+            >
+            <a
               v-if="list.is_approved == 1"
               type="button"
               class="btn btn-secondary"
@@ -50,32 +56,49 @@ export default {
     return {
       isloggedIn: localStorage.getItem("isloggedIn"),
 
-      token: localStorage.getItem("token"),
-
       lists: [],
     };
   },
 
   methods: {
-    update(user_id) {
+    update(id) {
       axios
         .put("http://localhost:8000/api/todo/update", {
-          id: user_id,
+          id: id,
         })
         .then((response) => {
-          alert(response.data.message);
           axios
             .get("http://localhost:8000/api/todo/index", {})
             .then((response) => {
               console.log(response.data.data);
               this.lists = response.data.data;
             });
+          alert(response.data.message);
         })
         .catch((error) => {
           if (error.response) {
             alert(error.response.data.error);
           }
         });
+    },
+    destroy(id) {
+      let confirmation = confirm("Are you sure to delete this task ?");
+      if (confirmation)
+        axios
+          .delete("http://localhost:8000/api/todo/delete/" + id, {})
+          .then((response) => {
+            alert(response.data.data);
+            axios
+              .get("http://localhost:8000/api/todo/index", {})
+              .then((response) => {
+                this.lists = response.data.data;
+              });
+          })
+          .catch((error) => {
+            if (error.response) {
+              alert(error.response.data.error);
+            }
+          });
     },
     addList() {
       return this.$router.push({ name: "addList" });
@@ -103,5 +126,8 @@ export default {
 th,
 td {
   text-align: center;
+}
+.btn-danger {
+  margin-right: 20px;
 }
 </style>
