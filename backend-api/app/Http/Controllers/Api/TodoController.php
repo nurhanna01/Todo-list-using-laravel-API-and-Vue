@@ -65,16 +65,9 @@ class TodoController extends BaseController
         return $this->responseOk('Success', 200);
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $validator = Validator::make($request->all(), [
-            'id'          => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->responseError('Failed', 402, $validator->errors());
-        }
-        $todo = Todo::find($request->id);
+        $todo = Todo::find($id);
         $todo->delete();
         return $this->responseOk('Success', 200);
     }

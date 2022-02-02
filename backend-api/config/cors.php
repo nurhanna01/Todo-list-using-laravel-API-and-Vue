@@ -24,7 +24,7 @@ return [
         'todo/index',
         '/todo/create',
         '/todo/update',
-        '/todo/delete',
+        '/todo/delete/{id}',
         '/todo/search/{date}',
         'sanctum/csrf-cookie'
     ],

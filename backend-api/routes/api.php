@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/todo/index', [TodoController::class, 'index']);
     Route::post('/todo/create', [TodoController::class, 'create']);
     Route::put('/todo/update', [TodoController::class, 'update']);
-    Route::delete('/todo/delete', [TodoController::class, 'delete']);
+    Route::delete('/todo/delete/{id}', [TodoController::class, 'delete']);
     Route::get('/todo/search/{date}', [TodoController::class, 'search']);
 
     Route::get('/user/profil', [UserController::class, 'profil']);
