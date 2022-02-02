@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <strong>ToDo List Today</strong>
+    <p></p>
+    <button class="btn btn-primary float-end" v-on:click="addList">
+      <i class="fa fa-plus"></i> Add new todo list
+    </button>
     <table class="table table-success">
       <thead>
         <tr>
@@ -72,6 +76,9 @@ export default {
             alert(error.response.data.error);
           }
         });
+    },
+    addList() {
+      return this.$router.push({ name: "addList" });
     },
   },
   created() {
