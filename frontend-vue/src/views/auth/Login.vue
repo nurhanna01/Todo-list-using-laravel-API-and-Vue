@@ -35,6 +35,10 @@
           </div>
           <button type="submit" class="btn btn-primary float-end">LOGIN</button>
         </form>
+        <p>
+          Don't have an account yet?
+          <router-link to="register">Click here!</router-link>
+        </p>
       </div>
     </div>
   </div>

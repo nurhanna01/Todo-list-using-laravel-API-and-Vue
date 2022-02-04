@@ -11,12 +11,12 @@ const router = new VueRouter({
       name: "home",
       component: () => import(/* webpackChunkName: "Home" */ "@/views/Home"),
     },
-    // {
-    //     path: '/register',
-    //     name: 'register',
-    //     component: () =>
-    //         import( /* webpackChunkName: "Auth" */ "@/views/auth/Register"),
-    // },
+    {
+      path: "/register",
+      name: "register",
+      component: () =>
+        import(/* webpackChunkName: "Auth" */ "@/views/auth/Register"),
+    },
     {
       path: "/login",
       name: "login",
