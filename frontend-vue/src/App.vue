@@ -8,10 +8,9 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <router-link :to="{ name: 'profile' }" class="nav-link active"
+            >My Profile</router-link
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>

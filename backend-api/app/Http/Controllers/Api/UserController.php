@@ -78,7 +78,7 @@ class UserController extends BaseController
         $user = User::find($id);
 
         $user->name = $request->name;
-        $user->birth = $request->bitrh;
+        $user->birth = $request->birth;
         $user->gender = $request->gender;
         $update_user = $user->save();
 

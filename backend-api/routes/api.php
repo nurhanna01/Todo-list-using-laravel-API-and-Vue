@@ -22,12 +22,12 @@ Route::post('/user/login', [UserController::class, 'login']);
 //     return $request->user();
 // });
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/todo/index', [TodoController::class, 'index']);
-    Route::post('/todo/create', [TodoController::class, 'create']);
-    Route::put('/todo/update', [TodoController::class, 'update']);
-    Route::delete('/todo/delete/{id}', [TodoController::class, 'delete']);
+    Route::get('/todo', [TodoController::class, 'index']);
+    Route::post('/todo', [TodoController::class, 'create']);
+    Route::put('/todo', [TodoController::class, 'update']);
+    Route::delete('/todo/{id}', [TodoController::class, 'delete']);
     Route::get('/todo/search/{date}', [TodoController::class, 'search']);
 
     Route::get('/user/profil', [UserController::class, 'profil']);
-    Route::put('/user/update', [UserController::class, 'update']);
+    Route::put('/user/profil', [UserController::class, 'update']);
 });

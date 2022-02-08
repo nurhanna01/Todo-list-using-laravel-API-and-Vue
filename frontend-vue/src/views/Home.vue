@@ -63,16 +63,14 @@ export default {
   methods: {
     update(id) {
       axios
-        .put("http://localhost:8000/api/todo/update", {
+        .put("http://localhost:8000/api/todo", {
           id: id,
         })
         .then((response) => {
-          axios
-            .get("http://localhost:8000/api/todo/index", {})
-            .then((response) => {
-              console.log(response.data.data);
-              this.lists = response.data.data;
-            });
+          axios.get("http://localhost:8000/api/todo", {}).then((response) => {
+            console.log(response.data.data);
+            this.lists = response.data.data;
+          });
           alert(response.data.message);
         })
         .catch((error) => {
@@ -85,11 +83,11 @@ export default {
       let confirmation = confirm("Are you sure to delete this task ?");
       if (confirmation)
         axios
-          .delete("http://localhost:8000/api/todo/delete/" + id, {})
+          .delete("http://localhost:8000/api/todo/" + id, {})
           .then((response) => {
             alert(response.data.data);
             axios
-              .get("http://localhost:8000/api/todo/index", {})
+              .get("http://localhost:8000/api/todo/", {})
               .then((response) => {
                 this.lists = response.data.data;
               });
@@ -106,7 +104,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:8000/api/todo/index", {})
+      .get("http://localhost:8000/api/todo", {})
       .then((response) => {
         console.log(response.data.data);
         this.lists = response.data.data;

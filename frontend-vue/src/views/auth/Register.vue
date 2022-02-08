@@ -1,6 +1,6 @@
 <template>
   <div class="container-md">
-    <p>hanna</p>
+    <b>Register</b>
     <form v-on:submit.prevent>
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>

@@ -52,16 +52,14 @@ export default {
   methods: {
     create() {
       axios
-        .post("http://localhost:8000/api/todo/create", {
+        .post("http://localhost:8000/api/todo", {
           task: this.task,
         })
         .then((response) => {
           alert(response.data.data);
-          axios
-            .get("http://localhost:8000/api/todo/index", {})
-            .then((response) => {
-              this.lists = response.data.data;
-            });
+          axios.get("http://localhost:8000/api/todo", {}).then((response) => {
+            this.lists = response.data.data;
+          });
           this.task = "";
         })
         .catch((error) => {
@@ -78,7 +76,7 @@ export default {
 
   created() {
     axios
-      .get("http://localhost:8000/api/todo/index", {})
+      .get("http://localhost:8000/api/todo", {})
       .then((response) => {
         this.lists = response.data.data;
       })

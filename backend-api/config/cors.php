@@ -20,11 +20,8 @@ return [
         'user/login',
         'user/register',
         '/user/profil',
-        '/user/update',
-        'todo/index',
-        '/todo/create',
-        '/todo/update',
-        '/todo/delete/{id}',
+        '/todo',
+        '/todo/{id}',
         '/todo/search/{date}',
         'sanctum/csrf-cookie'
     ],
