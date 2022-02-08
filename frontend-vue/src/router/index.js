@@ -24,6 +24,18 @@ const router = new VueRouter({
         import(/* webpackChunkName: "Auth" */ "@/views/auth/Login"),
     },
     {
+      path: "/profile",
+      name: "profile",
+      component: () =>
+        import(/* webpackChunkName: "Profile" */ "@/views/Profile"),
+    },
+    {
+      path: "/editprofile",
+      name: "editprofile",
+      component: () =>
+        import(/* webpackChunkName: "EditProfile" */ "@/views/EditProfile"),
+    },
+    {
       path: "/addtodolist",
       name: "addList",
       component: () =>
