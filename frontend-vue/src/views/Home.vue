@@ -3,7 +3,7 @@
     <strong>ToDo List Today</strong>
     <p></p>
     <button class="btn btn-primary float-end" v-on:click="addList">
-      <i class="fa fa-plus"></i> Add new todo list
+      <font-awesome-icon icon="fa-solid fa-plus" /> Add new todo list
     </button>
     <table class="table table-success">
       <thead>

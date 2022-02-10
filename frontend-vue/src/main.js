@@ -11,6 +11,24 @@ import "jquery/dist/jquery.min";
 import "popper.js/dist/popper.min";
 import "bootstrap/dist/js/bootstrap.min";
 
+/* add fontawesome core */
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+/* add some free styles */
+import {
+  faUser,
+  faHome,
+  faUserGear,
+  faPowerOff,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+
+library.add(faUser, faHome, faUserGear, faPowerOff, faPlus);
+
 //set credential axios with true
 axios.defaults.withCredentials = true;
 

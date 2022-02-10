@@ -1,25 +1,20 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <router-link :to="{ name: 'home' }" class="nav-link active"
-            >Home</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'profile' }" class="nav-link active"
-            >My Profile</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-    </nav>
+    <topnavbar />
     <router-view></router-view>
   </div>
 </template>
+
+<script type="text/javascript">
+import topnavbar from "./views/TopNavbar.vue";
+
+export default {
+  components: {
+    topnavbar, // register component
+  },
+};
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -61,6 +61,14 @@ class UserController extends BaseController
         return $this->responseOk($user, 200, 'Login Succes!');
     }
 
+    public function logout(Request $request)
+    {
+        // Revoke the token that was used to authenticate the current request...
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->responseOk('', 200, 'Succes!');
+    }
+
     public function profil()
     {
         $id = Auth::user()->id;

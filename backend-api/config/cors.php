@@ -19,6 +19,7 @@ return [
         'api/*',
         'user/login',
         'user/register',
+        'user/logout',
         '/user/profil',
         '/todo',
         '/todo/{id}',

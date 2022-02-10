@@ -1,10 +1,6 @@
 <template>
   <div class="container-md">
-<<<<<<< HEAD
-    <p>hanna</p>
-=======
-    <b>Register</b>
->>>>>>> 9780ec61e8e4422c8ca99ba9779886691a98fc5b
+    <b>Register New User</b><br />
     <form v-on:submit.prevent>
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>

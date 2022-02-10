@@ -9,6 +9,7 @@
           placeholder="Input Task"
           aria-label=""
           v-model="task"
+          v-on:keyup.enter="create"
         />
       </div>
       <div class="col-sm">
