@@ -12,6 +12,12 @@ export default {
   components: {
     topnavbar, // register component
   },
+  created: function () {
+    document.body.style.backgroundColor = "#98bae7";
+  },
+  destroyed: function () {
+    document.body.style.backgroundColor = null;
+  },
 };
 </script>
 
@@ -21,8 +27,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-top: 100px;
-}
-* {
-  background-color: #98bae7;
 }
 </style>

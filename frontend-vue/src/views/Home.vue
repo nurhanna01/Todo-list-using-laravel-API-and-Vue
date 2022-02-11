@@ -71,32 +71,60 @@ export default {
             console.log(response.data.data);
             this.lists = response.data.data;
           });
-          alert(response.data.message);
+          this.$swal({
+            icon: "success",
+            title: response.data.message,
+            showConfirmButton: false,
+            timer: 1000,
+          });
         })
         .catch((error) => {
           if (error.response) {
-            alert(error.response.data.error);
+            this.$swal({
+              icon: "error",
+              title: error.response.data.error,
+              showConfirmButton: true,
+            });
           }
         });
     },
     destroy(id) {
-      let confirmation = confirm("Are you sure to delete this task ?");
-      if (confirmation)
-        axios
-          .delete("http://localhost:8000/api/todo/" + id, {})
-          .then((response) => {
-            alert(response.data.data);
-            axios
-              .get("http://localhost:8000/api/todo/", {})
-              .then((response) => {
-                this.lists = response.data.data;
+      this.$swal({
+        title: "Are you sure to delete this task ?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("http://localhost:8000/api/todo/" + id, {})
+            .then((response) => {
+              this.$swal({
+                icon: "success",
+                title: response.data.data,
+                showConfirmButton: false,
+                timer: 1500,
               });
-          })
-          .catch((error) => {
-            if (error.response) {
-              alert(error.response.data.error);
-            }
-          });
+              axios
+                .get("http://localhost:8000/api/todo/", {})
+                .then((response) => {
+                  this.lists = response.data.data;
+                });
+            })
+            .catch((error) => {
+              if (error.response) {
+                this.$swal({
+                  icon: "error",
+                  title: error.response.data.error,
+                  showConfirmButton: true,
+                });
+              }
+            });
+        }
+      });
     },
     addList() {
       return this.$router.push({ name: "addList" });

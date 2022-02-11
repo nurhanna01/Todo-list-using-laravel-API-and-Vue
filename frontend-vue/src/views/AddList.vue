@@ -57,7 +57,12 @@ export default {
           task: this.task,
         })
         .then((response) => {
-          alert(response.data.data);
+          this.$swal({
+            icon: "success",
+            title: response.data.data,
+            showConfirmButton: false,
+            timer: 1000,
+          });
           axios.get("http://localhost:8000/api/todo", {}).then((response) => {
             this.lists = response.data.data;
           });
@@ -65,7 +70,11 @@ export default {
         })
         .catch((error) => {
           if (error.response) {
-            alert(error.response.data.error);
+            this.$swal({
+              icon: "error",
+              title: error.response.data.error,
+              showConfirmButton: true,
+            });
           }
         });
     },

@@ -86,13 +86,15 @@ export default {
 
                   this.isloggedIn = true;
                   return this.$router.push({ name: "home" });
-                } else {
-                  this.loginFailed = true;
                 }
               })
               .catch((error) => {
                 if (error.response) {
-                  alert(error.response.data.error);
+                  this.$swal({
+                    icon: "error",
+                    title: error.response.data.error,
+                    showConfirmButton: true,
+                  });
                 }
               });
           });

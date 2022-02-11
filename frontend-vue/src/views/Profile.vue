@@ -1,42 +1,46 @@
 <template>
   <div class="container">
-    <img
-      src="../../public/icon_profile.png"
-      class="mx-auto d-block"
-      width="300"
-    />
+    <div class="card">
+      <div class="card-body">
+        <img
+          src="../../public/icon_profile.png"
+          class="mx-auto d-block"
+          width="300"
+        />
 
-    <div class="row border-top">
-      <div class="col"><p>Name</p></div>
-      <div class="col">
-        <p>{{ myProfile.name }}</p>
-      </div>
-    </div>
-    <div class="row border-top">
-      <div class="col"><p>Email</p></div>
-      <div class="col">
-        <p>{{ myProfile.email }}</p>
-      </div>
-    </div>
-    <div class="row border-top">
-      <div class="col"><p>Jenis Kelamin</p></div>
-      <div class="col">
-        <p v-if="myProfile.gender == 'P'">Perempuan</p>
-        <p v-if="myProfile.gender == 'L'">Laki-laki</p>
-      </div>
-    </div>
+        <div class="row border-top">
+          <div class="col"><p>Name</p></div>
+          <div class="col">
+            <p>{{ myProfile.name }}</p>
+          </div>
+        </div>
+        <div class="row border-top">
+          <div class="col"><p>Email</p></div>
+          <div class="col">
+            <p>{{ myProfile.email }}</p>
+          </div>
+        </div>
+        <div class="row border-top">
+          <div class="col"><p>Jenis Kelamin</p></div>
+          <div class="col">
+            <p v-if="myProfile.gender == 'P'">Perempuan</p>
+            <p v-if="myProfile.gender == 'L'">Laki-laki</p>
+          </div>
+        </div>
 
-    <div class="row border-top">
-      <div class="col"><p>Tanggal Lahir</p></div>
-      <div class="col">
-        <p>{{ myProfile.birth }}</p>
+        <div class="row border-top">
+          <div class="col"><p>Tanggal Lahir</p></div>
+          <div class="col">
+            <p>{{ myProfile.birth }}</p>
+          </div>
+        </div>
+        <router-link
+          :to="{ name: 'editprofile' }"
+          class="btn btn-primary mx-auto d-block"
+          >Edit Profile</router-link
+        >
       </div>
     </div>
-    <router-link
-      :to="{ name: 'editprofile' }"
-      class="btn btn-primary mx-auto d-block"
-      >Edit Profile</router-link
-    >
   </div>
 </template>
 

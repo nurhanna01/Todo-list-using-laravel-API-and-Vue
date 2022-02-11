@@ -53,12 +53,8 @@ export default {
 };
 </script>
 <style>
-.drop:hover {
-  background-color: #7267cb !important;
-}
-
-.dropdown,
-.nav {
-  background-color: white !important;
+.drop:hover,
+.nav-link:hover {
+  background-color: #00b4d8 !important;
 }
 </style>

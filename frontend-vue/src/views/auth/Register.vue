@@ -1,78 +1,85 @@
 <template>
   <div class="container-md">
-    <b>Register New User</b><br />
-    <form v-on:submit.prevent>
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          aria-describedby="name"
-          v-model="user.name"
-        />
+    <div class="card">
+      <div class="card-body">
+        <b>Register New User</b><br />
+        <form v-on:submit.prevent>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              aria-describedby="name"
+              v-model="user.name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              v-model="user.email"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+            <div v-if="validation.email" class="mt-2 alert alert-danger">
+              Email Required
+            </div>
+            <div v-if="isError.email" class="mt-2 alert alert-danger">
+              {{ error.email[0] }}
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              v-model="user.password"
+            />
+            <div v-if="validation.email" class="mt-2 alert alert-danger">
+              Password Required
+            </div>
+            <div v-if="isError.password" class="mt-2 alert alert-danger">
+              {{ error.password[0] }}
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="birth" class="form-label">Birthday</label>
+            <input
+              type="date"
+              class="form-control"
+              id="birth"
+              v-model="user.birth"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select id="" class="form-select" v-model="user.gender">
+              <option value="none">select gender</option>
+              <option value="P">Women</option>
+              <option value="L">Men</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" v-on:click="register">
+            Submit
+          </button>
+        </form>
       </div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          v-model="user.email"
-        />
-        <div id="emailHelp" class="form-text">
-          We'll never share your email with anyone else.
-        </div>
-        <div v-if="validation.email" class="mt-2 alert alert-danger">
-          Email Required
-        </div>
-        <div v-if="isError.email" class="mt-2 alert alert-danger">
-          {{ error.email[0] }}
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="exampleInputPassword1"
-          v-model="user.password"
-        />
-        <div v-if="validation.email" class="mt-2 alert alert-danger">
-          Password Required
-        </div>
-        <div v-if="isError.password" class="mt-2 alert alert-danger">
-          {{ error.password[0] }}
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="birth" class="form-label">Birthday</label>
-        <input
-          type="date"
-          class="form-control"
-          id="birth"
-          v-model="user.birth"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="gender" class="form-label">Gender</label>
-        <select id="" class="form-select" v-model="user.gender">
-          <option value="none">select gender</option>
-          <option value="P">Women</option>
-          <option value="L">Men</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary" v-on:click="register">
-        Submit
-      </button>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
   name: "Register",
 
@@ -102,7 +109,12 @@ export default {
               gender: this.user.gender,
             })
             .then((response) => {
-              alert(response.data.message);
+              this.$swal({
+                icon: "success",
+                title: response.data.message,
+                showConfirmButton: false,
+                timer: 1500,
+              });
               this.user = "";
               return this.$router.push({ name: "login" });
             })
@@ -117,7 +129,11 @@ export default {
                   this.error.password =
                     error.response.data.errorDetail.password;
                 }
-                alert(error.response.data.error);
+                this.$swal({
+                  icon: "error",
+                  title: error.response.data.error,
+                  showConfirmButton: true,
+                });
               }
             });
         });
